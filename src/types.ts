@@ -93,8 +93,9 @@ export enum Error {
   NotFound = 'La ressource est introuvable',
   RouteNotFound = 'La route est introuvable',
   UserNotFound = "L'utilisateur est introuvable",
+  TeamNotFound = "L'équipe est introuvable",
   OrderNotFound = 'La commande est introuvable',
-  WrongRegisterToken = "Token d'enregistrement invalide",
+  WrongRegisterToken = 'Le token est invalide',
 
   // 406
   NotAcceptable = 'Contenu envoyé inacceptable',
