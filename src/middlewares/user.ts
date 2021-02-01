@@ -2,14 +2,16 @@ import { NextFunction, Request, Response } from 'express';
 import jwt, { TokenExpiredError } from 'jsonwebtoken';
 import log from '../utils/log';
 import { Error, DecodedToken } from '../types';
-import { badRequest } from '../utils/responses';
+import { badRequest, unauthenticated } from '../utils/responses';
 import { getRequestUser } from '../utils/user';
 import { jwtSecret } from '../utils/environment';
 import { fetchUser } from '../operations/user';
 
 // Check the user's team. If he's in one, it will return an error.
 export const isNotInATeam = (request: Request, response: Response, next: NextFunction) => {
+  // Check if user is authenticated
   const user = getRequestUser(response);
+  if (!user) return unauthenticated(response);
 
   if (user.teamId) {
     log.debug(`${request.path} failed : already in team`);
