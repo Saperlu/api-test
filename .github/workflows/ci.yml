@@ -16,7 +16,9 @@ jobs:
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
       - run: yarn --frozen-lockfile
       - run: yarn prisma generate
-      - uses: actions/checkout@v2
+      - run: env
+      - run: ls -l node_modules/.bin
+      - run: cat package.json
       - env:
           BRANCH: ${{ github.ref == 'refs/heads/master' && 'master' || 'dev' }}
           DBDOCS_TOKEN: ${{ secrets.DBDOCS_TOKEN }}
